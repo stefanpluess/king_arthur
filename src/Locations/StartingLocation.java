@@ -1,5 +1,6 @@
 package Locations;
-
+import Merlin.Merlin;
+import Merlin.merlinType;
 import States.State;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,7 +11,9 @@ This is a dummy location and will be replaced by the real starting location
  */
 
 public class StartingLocation implements Location{
-    public boolean markedByMerlin = false;
+
+    public Merlin merlin;
+    public merlinType markedByMerlin = merlinType.NONE;
 
     @Override
     public String toString(){return "startingLocation";}
@@ -28,24 +31,9 @@ public class StartingLocation implements Location{
         p.setCurrentPosition(newLocation);
         System.out.println("Moved to " + newLocation);
         System.out.println(p.currentPosition); //useless?
-        if(newLocation.getMarkedByMerlin()){
-            newLocation.setMarkedByMerlin();
-            int freeGood = (int) (Math.random() * 3);
-            System.out.print("Du hast meinen Rat befolgt, Nimm diese 2 ");
-            switch (freeGood) {
-                case 0 -> {
-                    p.changeShields(2);
-                    System.out.println("Schilder");
-                }
-                case 1 -> {
-                    p.changeSupplies(2);
-                    System.out.println("Vorräte");
-                }
-                case 2 -> {
-                    p.changeSwords(2);
-                    System.out.println("Schwerter");
-                }
-            }
+        if(newLocation.getMarkedByMerlin() != merlinType.NONE){
+            merlin.merlinGiveReward(p, newLocation.getMarkedByMerlin());
+            newLocation.removeMarkedByMerlin();
             return true;
         }
         return false;
@@ -59,8 +47,12 @@ public class StartingLocation implements Location{
     public void addadjacents(Location l){
         adjacent.add(l);
     }
-    public void setMarkedByMerlin(){
-        this.markedByMerlin = !this.markedByMerlin;
+    public void setMarkedByMerlin(merlinType m){
+        this.markedByMerlin = m;
     }
-    public boolean getMarkedByMerlin(){return this.markedByMerlin;}
+    public merlinType getMarkedByMerlin(){return this.markedByMerlin;}
+    public void removeMarkedByMerlin(){this.markedByMerlin = merlinType.NONE;}
+    public void setMerlinInstance(Merlin m){
+        this.merlin = m;
+    }
 }

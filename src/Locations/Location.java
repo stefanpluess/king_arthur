@@ -1,5 +1,7 @@
 package Locations;
 
+import Merlin.Merlin;
+import Merlin.merlinType;
 import States.State;
 import Player.Player;
 import java.util.ArrayList;
@@ -16,7 +18,9 @@ public interface Location {
     public ArrayList<Location> adjacent = new ArrayList<Location>();
     public boolean move(Player p);
     public void chooseAdventure(Player p);
-    public void setMarkedByMerlin();
-    public boolean getMarkedByMerlin();
+    public void setMarkedByMerlin(merlinType m);
+    public merlinType getMarkedByMerlin();
+    public void removeMarkedByMerlin();
+    public void setMerlinInstance(Merlin m);
 
 }

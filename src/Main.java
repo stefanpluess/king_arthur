@@ -2,6 +2,7 @@ import Locations.Bridge;
 import Locations.Location;
 import Locations.StartingLocation;
 import Locations.Tournament_Ground;
+import Merlin.Merlin;
 import Player.Player;
 import States.*;
 
@@ -54,9 +55,15 @@ public class Main {
         locationList.add(startingLocation);
         locationList.add(tournament_ground);
 
-        //create Merlin instance
+        //create Merlin.Merlin instance
 
         Merlin merlin = new Merlin(locationList);
+
+        //give merlin instance to the locations
+
+        for (Location loc:locationList){
+            loc.setMerlinInstance(merlin);
+        }
 
         //fill adjacency list
 
@@ -85,14 +92,15 @@ public class Main {
             for(Player currentPlayer:playerList){
                 boolean wasItMarked = currentPlayer.currentPosition.move(currentPlayer);
                 if(wasItMarked){
-                    Location newMarked = merlin.merlinChooseNext(locationList);
+
+                    Location newMarked = merlin.merlinChooseNext(locationList, currentPlayer.currentPosition.getMarkedByMerlin());
                 }else {
                     currentPlayer.currentPosition.chooseAdventure(currentPlayer);
                 }
             }
             System.out.println("continue?");
             Scanner inp = new Scanner(System.in);
-            if(inp.nextLine() == "exit"){
+            if(inp.nextLine().equals("exit")){
                 System.exit(0);
             }
         }
