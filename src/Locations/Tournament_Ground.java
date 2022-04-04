@@ -12,8 +12,8 @@ public class Tournament_Ground implements Location{
     public Merlin merlin;
     @Override
     public String toString(){return "TurnierPlatz";}
-    public ArrayList<State> possibleAdventures = new ArrayList<State>();
-    public ArrayList<Location> adjacent = new ArrayList<Location>();
+    public ArrayList<State> possibleAdventures = new ArrayList<>();
+    public ArrayList<Location> adjacent = new ArrayList<>();
     public boolean move(Player p){
         System.out.println("-Tournament_Ground- Where would you like to move Player" + p.name);
         System.out.println(adjacent);
@@ -38,6 +38,7 @@ public class Tournament_Ground implements Location{
 
         int chosenAdventure = (int) (Math.floor(Math.random() * possibleAdventures.size()));
         System.out.println(chosenAdventure);
+        System.out.println(possibleAdventures);
         p.setCurrentState(possibleAdventures.get(chosenAdventure));
         p.startAdventure();
     }

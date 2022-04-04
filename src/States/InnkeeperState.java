@@ -1,9 +1,10 @@
 package States;
 
 import Player.Player;
-
+import Player.Goods;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 /*
 This State contains the innKeeper, he might gift you some things or trade with you.
@@ -11,12 +12,22 @@ This State contains the innKeeper, he might gift you some things or trade with y
 NOT IMPLEMENTED YET
 -doNothing
 -explore
+NOT WORKING PROPERLY
+-trade:
+    -you can trade even if you dont have any of the chosen good
+    -
+
  */
 
 
-public class InnkeeperState implements State{
-
+public class InnkeeperState extends State{
+    //Variables
+    private final Goods[] GoodList = {Goods.SWORDS, Goods.SHIELDS, Goods.SUPPLIES};
+    public Status[] stats = {Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN};
     public ArrayList<Status> statusList = new ArrayList<>();
+
+
+    //Methods
     @Override
     public void fillStatusList(ArrayList<Player> playerList){
         for(Player p:playerList){
@@ -30,11 +41,11 @@ public class InnkeeperState implements State{
     }
     public void begin(Player p) {
         Random rand = new Random();
-        switch (rand.nextInt(5)) {
+        switch (rand.nextInt(2)) {
             case 0:
                 System.out.println("Aaah seid gegrüsst edler Ritter. Hier nehmt 2 Vorräte");
-                p.changeSupplies(2);
-                statusList.set(Integer.parseInt(p.name), Status.MET);
+                p.changeGoods(Goods.SUPPLIES, 2);
+                statusList.set(Integer.parseInt(p.name)-1, Status.MET);
                 break;
             case 1:
                 System.out.print("Willkommen im Gasthaus edler Ritter. Ihr könnt mit mir handeln");
@@ -55,44 +66,38 @@ public class InnkeeperState implements State{
         System.out.println("aint doin shit here");
     }
     public void trade(Player p, Random rand) {
-        String[] chosen = {"", ""};
-        for (int i=0; i<3; i++ ) {
-            switch (rand.nextInt(3)) {
-                case 0:
-                    System.out.println("chose supplies");
-                    if(chosen[0].equals("supplies")){
-                        chosen[i] = "swords";
-                    }else {
-                        chosen[i] = "supplies";
-                    }
-                    break;
-                case 1:
-                    System.out.println("chose swords");
-                    if(chosen[0].equals("swords")){
-                        chosen[i] = "shields";
-                    }else {
-                        chosen[i] = "swords";
-                    }
-                    break;
-                case 2:
-                    System.out.println("chose shields");
-                    if(chosen[0].equals("shields")){
-                        chosen[i] = "supplies";
-                    }else {
-                        chosen[i] = "shields";
-                    }
-                    break;
-            }
-        }
-
+        Goods[] chosen = {GoodList[rand.nextInt(2)], Goods.NONE};
+        do{
+            chosen[1] = GoodList[rand.nextInt(2)];
+        }while(chosen[0] == chosen[1]);
+        System.out.println(chosen[0]);
+        System.out.println(chosen[1]);
         int amount = rand.nextInt(3);
         if(getStats(p) == Status.DEFEATED){
             amount -= 1;
         }
-
-        System.out.printf("Gebt mir %d %s und ihr erhaltet von mir 3 %s", amount, chosen[0], chosen[1]);
+        System.out.printf("Gebt mir 1 %s und ihr erhaltet von mir %d %s",  chosen[0], amount , chosen[1]);
+        Scanner in = new Scanner(System.in);
+        System.out.println("Nimmst du mein Angebot an? gib y für ja oder n für nein ein");
+        String s = "";
+        while(!s.equals("y") && !s.equals("n")){
+            s = in.nextLine();
+        }
+        switch(s){
+            case "y":
+                System.out.printf("Toll! wie viele %s möchtest du mir geben?", chosen[0]);
+                System.out.printf("Du hast aktuell %d %s", p.getGoods(chosen[0]), chosen[0].toString());
+                int tradedGoods = Integer.parseInt(in.nextLine());
+                p.changeGoods(chosen[0], -tradedGoods);
+                p.changeGoods(chosen[1], amount*tradedGoods);
+                System.out.println("Es war mir ein Vergnügen mit dir Geschäfte zu machen!");
+                System.out.printf("Du hast nun %d %s und %d %s", p.getGoods(chosen[0]), chosen[0].toString(), p.getGoods(chosen[1]), chosen[1].toString());
+                break;
+            case "n":
+                System.out.println("Schade! komm wieder vorbei falls du doch noch handeln möchtest.");
+        }
     }
-    public Status[] stats = {Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN};
+
     @Override
     public Status getStats(Player p){
         return stats[Integer.parseInt(p.name)];
@@ -104,21 +109,21 @@ public class InnkeeperState implements State{
         int amount = rand.nextInt(2) + 1;
         switch(rand.nextInt(3)){
             case 0:
-                p.changeSwords(amount);
+                p.changeGoods(Goods.SWORDS, amount);
                 System.out.printf("Ihr erhaltet %d Schwerter", amount);
                 break;
             case 1:
-                p.changeShields(amount);
+                p.changeGoods(Goods.SHIELDS, amount);
                 System.out.printf("Ihr erhaltet %d Schilder", amount);
                 break;
             case 2:
-                p.changeSupplies(amount);
+                p.changeGoods(Goods.SUPPLIES, amount);
                 System.out.printf("Ihr erhaltet %d Vorräte", amount);
                 break;
         }
         stats[Integer.parseInt(p.name) - 1] = Status.DEFEATED;
         System.out.printf("Ihr verliert Ruhm!");
-        p.increaseRuhm(-2);
+        p.changeRuhm(-2);
     }
 }
 

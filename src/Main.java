@@ -27,6 +27,7 @@ public class Main {
         State MalgrinState = new MalgrinState();
         State LadyOfTheSeaState = new LadyOfTheSeaState();
         State UngeheuerState = new UngeheuerState();
+        State InnkeeperState = new InnkeeperState();
 
         //Create Location instances
 
@@ -47,6 +48,7 @@ public class Main {
 
         //fill status List of States
         UngeheuerState.fillStatusList(playerList);
+        InnkeeperState.fillStatusList(playerList);
 
         //Create and fill locationList
 
@@ -84,8 +86,9 @@ public class Main {
 
         bridge.possibleAdventures.add(MalgrinState);
         startingLocation.possibleAdventures.add(BeginningState);
-        tournament_ground.possibleAdventures.add(LadyOfTheSeaState);
-        tournament_ground.possibleAdventures.add(UngeheuerState);
+        //tournament_ground.possibleAdventures.add(LadyOfTheSeaState);
+        //tournament_ground.possibleAdventures.add(UngeheuerState);
+        tournament_ground.possibleAdventures.add(InnkeeperState);
 
         //main loop of the game
         while(true){

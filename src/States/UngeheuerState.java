@@ -1,13 +1,14 @@
 package States;
 
 import Player.Player;
-
+import Player.Goods;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static Player.Goods.SWORDS;
 
 
-public class UngeheuerState implements State{
+public class UngeheuerState extends State{
 
     private int chance = 8;
     public Status[] stats = {Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN};
@@ -33,32 +34,18 @@ public class UngeheuerState implements State{
         System.out.println("schriiiiiiinggggg fjkdsahgqöjgs");
         Random rand = new Random();
 
+
+        if(getStats(p) == Status.SWORDSGIVEN){
+            chance = 4;
+        }
         int chosenNumber = rand.nextInt(chance);
         System.out.println(chosenNumber);
-        switch (chosenNumber){
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            {
-                if(getStats(p) == Status.SWORDSGIVEN) {
-                    System.out.println("rjkelöfdsasaaaaaadjsafhr\n budududum du hast das Ungeheuer besiegt, nimm diesen pendragon");
-                    p.setPenDragon(1);
-                    stats[Integer.parseInt(p.name)] = Status.DEFEATED;
-                    return;
-                }
-            }
-            case 0:
-            {
-                System.out.println("rjkelöfdsasaaaaaadjsafhr\n budududum du hast das Ungeheuer besiegt, nimm diesen pendragon");
-                p.setPenDragon(1);
-                stats[Integer.parseInt(p.name)] = Status.DEFEATED;
-                return;
-            }
-            default:
-            {
-                System.out.println("aaaarrghhhhhhhhhhhh try again");
-            }
+        if(chosenNumber == 0) {
+            System.out.println("rjkelöfdsasaaaaaadjsafhr\n budududum du hast das Ungeheuer besiegt, nimm diesen pendragon");
+            p.setPenDragon(1);
+            stats[Integer.parseInt(p.name)] = Status.DEFEATED;
+        }else {
+            System.out.println("aaaarrghhhhhhhhhhhh try again");
         }
     }
 
@@ -73,7 +60,7 @@ public class UngeheuerState implements State{
     @Override
     public void giveSwords(Player p){
         System.out.println("You gave two swords, your chances to win this fight have increasedd!\n You currently have " + p.getSwords() + " Swords.");
-        p.changeSwords(-2);
+        p.changeGoods(SWORDS,-2);
         /*
         this.statusList[Integer.parseInt(p.name)]
         */

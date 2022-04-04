@@ -1,7 +1,11 @@
 package States;
+import Player.Player;
 
 public enum Status {
-    DEFEATED,
+    DEFEATED{
+        @Override
+        public String toString(){return "defeated";}
+    },
     UNDEFEATED,
     UNKNOWN,
     SWORDSGIVEN,

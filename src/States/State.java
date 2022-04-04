@@ -4,16 +4,16 @@ import Player.Player;
 
 import java.util.ArrayList;
 
-public interface State {
-    public void begin(Player p);
-    public void explore(Player p);
-    public void doNothing(Player p);
-    public void fight(Player p);
-    //public void trade(Player p, Player p2);
-    public void giveSwords(Player p);
+public abstract class State {
+    public void begin(Player p){};
+    public void explore(Player p){};
+    public void doNothing(Player p){};
+    public void fight(Player p){};
+    public void trade(Player p){};
+    public void giveSwords(Player p){};
     public Status[] stats = {Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN};
-    public Status getStats(Player p);
-    public void fillStatusList(ArrayList<Player> p);
+    public Status getStats(Player p){return null;};
+    public void fillStatusList(ArrayList<Player> p){};
 }
 
 /*notes on game

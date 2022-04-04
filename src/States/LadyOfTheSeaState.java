@@ -4,7 +4,7 @@ import Player.Player;
 
 import java.util.ArrayList;
 
-public class LadyOfTheSeaState implements State{
+public class LadyOfTheSeaState extends State{
 
     public ArrayList<Status> statusList = new ArrayList<>();
     @Override
@@ -33,7 +33,5 @@ public class LadyOfTheSeaState implements State{
         return stats[Integer.parseInt(p.name)];
     }
     @Override
-    public void fight(Player p) {
-        return;
-    }
+    public void fight(Player p) {}
 }

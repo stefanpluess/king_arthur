@@ -1,10 +1,11 @@
 package States;
 
 import Player.Player;
-
+import Player.Goods;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
+
+import static Player.Goods.SWORDS;
 
 /*
 This state contains Malgrin the knight, you can fight him, give swords to increase the chances of winning
@@ -14,7 +15,7 @@ NOT IMPLEMENTED YET
 -doNothing
  */
 
-public class MalgrinState implements State{
+public class MalgrinState extends State{
 
     public Status[] stats = {Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN};
     public ArrayList<Status> statusList = new ArrayList<>();
@@ -33,7 +34,7 @@ public class MalgrinState implements State{
     public void giveSwords(Player p){
         if(p.getSwords() >= 2) {
             stats[Integer.parseInt(p.name) - 1] = Status.SWORDSGIVEN;
-            p.changeSwords(-2);
+            p.changeGoods(SWORDS,-2);
             System.out.println("You gave two Swords, your chances to win have increased now!\n You currently have " + p.getSwords() + " Swords.");
         } else{
             System.out.println("You do not have enough Swords to perform this action!");
@@ -84,7 +85,7 @@ public class MalgrinState implements State{
         if(rand.nextInt(4) == 0){
             System.out.println("AAAARRGHHH du hast mich besiegt. Du kannst passieren");
             stats[Integer.parseInt(p.name) - 1] = Status.DEFEATED;
-            p.increaseRuhm(3);
+            p.changeRuhm(3);
         }else{
             System.out.println("Hahaha das soll dir eine Lehre sein");
             p.goback();

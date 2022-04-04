@@ -4,7 +4,7 @@ import Player.Player;
 
 import java.util.ArrayList;
 
-public class BeginningState implements State{
+public class BeginningState extends State{
 
     public ArrayList<Status> statusList = new ArrayList<>();
 
