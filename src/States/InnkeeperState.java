@@ -13,9 +13,6 @@ NOT IMPLEMENTED YET
 -doNothing
 -explore
 NOT WORKING PROPERLY
--trade:
-    -you can trade even if you dont have any of the chosen good
-    -
 
  */
 
@@ -79,8 +76,9 @@ public class InnkeeperState extends State{
         System.out.printf("Gebt mir 1 %s und ihr erhaltet von mir %d %s",  chosen[0], amount , chosen[1]);
         Scanner in = new Scanner(System.in);
         System.out.println("Nimmst du mein Angebot an? gib y für ja oder n für nein ein");
-        String s = "";
+        String s = in.nextLine();
         while(!s.equals("y") && !s.equals("n")){
+            System.out.println("Fehlerhafte eingabe, gib y für ja oder n für nein ein.");
             s = in.nextLine();
         }
         switch(s){
@@ -88,6 +86,10 @@ public class InnkeeperState extends State{
                 System.out.printf("Toll! wie viele %s möchtest du mir geben?", chosen[0]);
                 System.out.printf("Du hast aktuell %d %s", p.getGoods(chosen[0]), chosen[0].toString());
                 int tradedGoods = Integer.parseInt(in.nextLine());
+                while (tradedGoods > p.getGoods(chosen[0])){
+                    System.out.printf("Hört auf zu scherzen Ritter, ihr habt doch selbst nicht so viele %s. Nun sagt, wie viele möchtet ihr mir geben?", chosen[0].toString());
+                    tradedGoods = Integer.parseInt(in.nextLine());
+                }
                 p.changeGoods(chosen[0], -tradedGoods);
                 p.changeGoods(chosen[1], amount*tradedGoods);
                 System.out.println("Es war mir ein Vergnügen mit dir Geschäfte zu machen!");

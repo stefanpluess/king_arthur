@@ -15,11 +15,6 @@ public class Main {
     public static void main(String[] args){
         //Create Class Instances
         ArrayList<Player> playerList = new ArrayList<>();
-        Board board = new Board();
-        /*
-        Player p = new Player();
-        Player p2 = new Player();
-        */
 
         //initialize State pattern
 
