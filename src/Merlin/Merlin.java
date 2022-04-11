@@ -13,7 +13,11 @@ import static Player.Goods.*;
 */
 public class Merlin {
 
+    //variables
+    private ArrayList<Location> locationList = new ArrayList<>();
+
     public Merlin(ArrayList<Location> locationList){
+        this.locationList = locationList;
         int newOne = (int) (Math.random() * locationList.size());
         System.out.println("Willkommen Abenteurer, hier ein Rat für euch alle. Geht zur " + locationList.get(newOne) + " um euren Ruhm zu erhöhen");
         locationList.get(newOne).setMarkedByMerlin(merlinType.GLORY);
@@ -25,7 +29,7 @@ public class Merlin {
         locationList.get(newOne).setMarkedByMerlin(merlinType.GOODS);
     }
 //keine burgen oder startpunkt markieren
-    public Location merlinChooseNext(ArrayList<Location> locationList, merlinType m){
+    public Location merlinChooseNext(merlinType m){
         int newOne;
         do{
             newOne = (int) (Math.random() * locationList.size());

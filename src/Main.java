@@ -1,7 +1,5 @@
 import Locations.Bridge;
-import Locations.Location;
-import Locations.StartingLocation;
-import Locations.Tournament_Ground;
+import Locations.*;
 import Merlin.Merlin;
 import Player.Player;
 import States.*;
@@ -81,6 +79,7 @@ public class Main {
 
         bridge.possibleAdventures.add(MalgrinState);
         startingLocation.possibleAdventures.add(BeginningState);
+        //commented for testing purposes
         //tournament_ground.possibleAdventures.add(LadyOfTheSeaState);
         //tournament_ground.possibleAdventures.add(UngeheuerState);
         tournament_ground.possibleAdventures.add(InnkeeperState);
@@ -88,13 +87,7 @@ public class Main {
         //main loop of the game
         while(true){
             for(Player currentPlayer:playerList){
-                boolean wasItMarked = currentPlayer.currentPosition.move(currentPlayer);
-                if(wasItMarked){
-
-                    Location newMarked = merlin.merlinChooseNext(locationList, currentPlayer.currentPosition.getMarkedByMerlin());
-                }else {
-                    currentPlayer.currentPosition.chooseAdventure(currentPlayer);
-                }
+                currentPlayer.currentPosition.move(currentPlayer);
             }
             System.out.println("continue?");
             Scanner inp = new Scanner(System.in);

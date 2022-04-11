@@ -48,13 +48,8 @@ public class InnkeeperState extends State{
                 System.out.print("Willkommen im Gasthaus edler Ritter. Ihr könnt mit mir handeln");
                 trade(p, rand);
                 break;
-
         }
-
     }
-
-
-
 
     public void explore (Player p){
             System.out.println("Ich bin die Herrin vom See, willsch du min fettli ha?");
