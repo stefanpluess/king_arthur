@@ -37,7 +37,7 @@ public abstract class Location {
         p.startAdventure();
     }
 
-    public void setMarkedByMerlin(merlinType m){}
+    public abstract void setMarkedByMerlin(merlinType m);
     public abstract merlinType getMarkedByMerlin();
     public abstract void removeMarkedByMerlin();
     public abstract void setMerlinInstance(Merlin m);

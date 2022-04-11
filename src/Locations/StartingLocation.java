@@ -8,7 +8,7 @@ import Player.Player;
 
 /*
 This is a dummy location and will be replaced by the real starting location
- */
+*/
 
 public class StartingLocation extends Location{
 
@@ -36,5 +36,4 @@ public class StartingLocation extends Location{
     }
     public Merlin getMerlinInstance(){return this.merlin;}
     public void removeMarkedByMerlin(){this.markedByMerlin = merlinType.NONE;}
-
 }
