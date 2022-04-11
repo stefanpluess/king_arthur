@@ -39,7 +39,7 @@ public abstract class Location {
 
     public void setMarkedByMerlin(merlinType m){}
     public abstract merlinType getMarkedByMerlin();
-    public void removeMarkedByMerlin(){this.markedByMerlin = merlinType.NONE;}
+    public abstract void removeMarkedByMerlin();
     public abstract void setMerlinInstance(Merlin m);
     public abstract Merlin getMerlinInstance();
     public void arrive(Player p){
