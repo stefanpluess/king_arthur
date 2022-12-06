@@ -57,20 +57,20 @@ public class Player {
     // TODO change the input method and probably implement this in another class with the input as a class of its own
     public void startAdventure(){
         this.currentState.begin(this);
-        switch(InputHandler.get){
-            case 0:
+        switch(InputHandler.getPlayerActionInput()){
+            case EXPLORE:
                 this.currentState.explore(this);
                 break;
-            case 1:
+            case DONOTHING:
                 this.currentState.doNothing(this);
                 break;
-            case 2:
+            case FIGHT:
                 this.currentState.fight(this);
                 break;
-            case 3:
+            case GIVESWORDS:
                 this.currentState.giveSwords(this);
                 break;
-            case 4:
+            case TRADE:
                 this.currentState.trade(this);
                 break;
         }

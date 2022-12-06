@@ -3,16 +3,21 @@ import Locations.*;
 import Merlin.Merlin;
 import Player.Player;
 import States.*;
+import GUI.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-
+    //TODO introduce a class that handles the game instead of the main method and introduce a class to setup the game
     public void checkIfWon(){}
     public static void main(String[] args){
         //Create Class Instances
         ArrayList<Player> playerList = new ArrayList<>();
+
+        //initialize InputHandler
+
+        InputHandler inp = new InputHandler();
 
         //initialize State pattern
 
@@ -30,9 +35,7 @@ public class Main {
 
         //Create and fill playerList
 
-        System.out.println("How many Players will play?");
-        Scanner in = new Scanner(System.in);
-        int playerAmount = Integer.parseInt(in.nextLine());
+        int playerAmount = inp.getAmountOfPlayers();
         for(int i = 0; i < playerAmount; i++){
             String s = Integer.toString(i+1);
             playerList.add(new Player(s));
@@ -89,11 +92,7 @@ public class Main {
             for(Player currentPlayer:playerList){
                 currentPlayer.currentPosition.move(currentPlayer);
             }
-            System.out.println("continue?");
-            Scanner inp = new Scanner(System.in);
-            if(inp.nextLine().equals("exit")){
-                System.exit(0);
-            }
+            inp.continuePlaying();
         }
     }
 }
