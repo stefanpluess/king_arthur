@@ -1,11 +1,8 @@
 package Player;
 
 import Locations.*;
-import Locations.StartingLocation;
 import States.State;
 import GUI.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Player {
 
@@ -16,8 +13,8 @@ public class Player {
     public String name;
 
     //variables for gameflow
-    public Location currentPosition;
-    private Location lastPosition;
+    public Location currentLocation;
+    private Location lastLocation;
     private State currentState;
 
     //inventory of the player
@@ -40,8 +37,8 @@ public class Player {
 
     //changes the current position of the player, saved in this.currentPosition and
     //prints the new location. the print statement will be replaced
-    public void setCurrentPosition(Location newlocation){
-        this.currentPosition = newlocation;
+    public void setCurrentLocation(Location newlocation){
+        this.currentLocation = newlocation;
         System.out.println("new Location is: " + newlocation);
     }
 
@@ -105,7 +102,7 @@ public class Player {
     //check if the player checks all conditions to have won the game. this method will probably be moved to
     //the location itself.
     public boolean checkIfWon(){
-        if(this.lanze && this.horse && this.armor && ruhm > 50){
+        if(this.lanze && this.horse && this.armor && this.ruhm > 50){
             System.out.println("this guy has won");
             return true;
         }
@@ -114,17 +111,17 @@ public class Player {
 
 
     //sets the last position so events like "going back" can be executed correctly
-    public void setLastPosition(Location l){
-        lastPosition = l;
+    public void setLastLocation(Location l){
+        lastLocation = l;
     }
 
 
     //exchanges the players current and last position
     public void goback(){
-        Location temp = this.currentPosition;
-        this.currentPosition = this.lastPosition;
-        this.lastPosition = temp;
-        System.out.println("You went back to" + this.currentPosition);
+        Location temp = this.currentLocation;
+        this.currentLocation = this.lastLocation;
+        this.lastLocation = temp;
+        System.out.println("You went back to" + this.currentLocation);
     }
 
 

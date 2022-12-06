@@ -6,7 +6,6 @@ import States.*;
 import GUI.*;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
     //TODO introduce a class that handles the game instead of the main method and introduce a class to setup the game
@@ -39,7 +38,7 @@ public class Main {
         for(int i = 0; i < playerAmount; i++){
             String s = Integer.toString(i+1);
             playerList.add(new Player(s));
-            playerList.get(i).setCurrentPosition(startingLocation);
+            playerList.get(i).setCurrentLocation(startingLocation);
         }
 
         //fill status List of States
@@ -90,7 +89,7 @@ public class Main {
         //main loop of the game
         while(true){
             for(Player currentPlayer:playerList){
-                currentPlayer.currentPosition.move(currentPlayer);
+                currentPlayer.currentLocation.move(currentPlayer);
             }
             inp.continuePlaying();
         }

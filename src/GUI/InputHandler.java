@@ -15,6 +15,11 @@ public class InputHandler {
         return Actions.values()[Integer.parseInt(input.nextLine())];
     }
 
+    public static Reactions getPlayerReactionInput(){
+        System.out.println("Enter your Reaction please. Press 0 for Friendship, 1 for Fight, 2 for Retreat, 3 for ignore and 4 for give");
+        return Reactions.values()[Integer.parseInt(input.nextLine())];
+    }
+
     public int getAmountOfPlayers(){
         System.out.println("How many Players will be playing? \n Pleasse enter a number between 1 and 4");
         return Integer.parseInt(input.nextLine());

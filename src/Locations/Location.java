@@ -27,8 +27,8 @@ public abstract class Location {
         //add validity check here
         int input = Integer.parseInt(in.nextLine());
         Location chosenLocation = this.adjacent.get(input);
-        p.setLastPosition(this);
-        p.setCurrentPosition(chosenLocation);
+        p.setLastLocation(this);
+        p.setCurrentLocation(chosenLocation);
         chosenLocation.arrive(p);
     }
     public void chooseAdventure(Player p){
