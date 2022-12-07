@@ -36,7 +36,7 @@ public abstract class Location {
         p.setCurrentState(possibleAdventures.get(chosenAdventure));
         p.startAdventure();
     }
-
+    public abstract void addadjacents(Location l);
     public abstract void setMarkedByMerlin(merlinType m);
     public abstract merlinType getMarkedByMerlin();
     public abstract void removeMarkedByMerlin();
