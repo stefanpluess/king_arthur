@@ -11,9 +11,9 @@ import States.*;
 
 public class GameControl {
     //Variables
-    ArrayList<Player> playerList = new ArrayList<>();
+    static ArrayList<Player> playerList = new ArrayList<>();
     ArrayList<Location> locationList = new ArrayList<>();
-    InputHandler inp = new InputHandler();
+    static InputHandler inp = new InputHandler();
 
     //States
     State BeginningState = new BeginningState();
@@ -23,10 +23,20 @@ public class GameControl {
     State InnkeeperState = new InnkeeperState();
 
     //Locations
-    Location StartingLocation = new StartingLocation();
+    static Location StartingLocation = new StartingLocation();
     Location Bridge = new Bridge(BeginningState);
     Location Tournament_Ground = new Tournament_Ground();
 
-    Setup setup = new Setup();
+    static Setup setup = new Setup(playerList, StartingLocation);
 
+    public static void main(String[] args){
+        setup.setupPlayerList(playerList, StartingLocation);
+        //main loop of the game
+        while(true){
+            for(Player currentPlayer:playerList){
+                currentPlayer.currentLocation.move(currentPlayer);
+            }
+            inp.continuePlaying();
+        }
+    }
 }
