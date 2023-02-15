@@ -52,6 +52,7 @@ public class Player {
     //starts the adventure. after determining the location and the new state this method will start the
     //adventure and give the player a choice. This method might need to be outsourced to a class of its own.
     // TODO change the input method and probably implement this in another class with the input as a class of its own
+    //TODO Figure out whether this method is necessary at all.
     public void startAdventure(){
         this.currentState.begin(this);
         switch(InputHandler.getPlayerActionInput()){
@@ -60,15 +61,6 @@ public class Player {
                 break;
             case DONOTHING:
                 this.currentState.doNothing(this);
-                break;
-            case FIGHT:
-                this.currentState.fight(this);
-                break;
-            case GIVESWORDS:
-                this.currentState.giveSwords(this);
-                break;
-            case TRADE:
-                this.currentState.trade(this);
                 break;
         }
     }

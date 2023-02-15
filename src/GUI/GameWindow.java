@@ -7,51 +7,53 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
+public class GameWindow{
+    static JFrame frame;
+    // IMPORTANT This is a Prototype for the GUI. It is neither connected to the rest of the program
+    GameWindow() throws IOException {
+        frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-public class GameWindow {
-    private static void createAndShowGUI(Game.GameControl gameControl, ,  board.GameState state) {
-        //Create and set up the window.
-        JFrame frame = new JFrame("King Arthur");
+        BufferedImage img = ImageIO.read(this.getClass().getResourceAsStream("/ScaledMap.png"));
+        ImageIcon icon = new ImageIcon(img);
+        frame.setLayout(new FlowLayout());
+        frame.setSize(900, 615);
+        JLabel label = new JLabel();
+        label.setIcon(icon);
+        frame.add(label);
+        frame.setVisible(true);
+    }
+    //This was my first try of creatin the GUI, not working, therefore commented out
+    /*public static void createGUI(){
+        frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationByPlatform(true);
+        ImageIcon icon = new ImageIcon("Map.png");
 
-        // create a layout panel
-        JPanel layout = new JPanel(new BorderLayout());
+        JLabel label = new JLabel();
+        label.setIcon(icon);
 
-        // Board Component
-        StateBoardComponent boardComponent = StateBoardComponent.initialize(gameControl, board, state);
-        BufferedImage myPicture = ImageIO.read(new File("path-to-file"));
-        JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-        add(picLabel);
 
-        // Button Highlight
-        JToggleButton button = new JToggleButton("Highlight Destinations: On");
-        button.setPreferredSize(new Dimension(40, 40));
-        ItemListener toggleListener = new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                boardComponent.toggleHighlightedDestination();
-                if (button.isSelected()) {
-                    button.setText("Highlight Destinations: Off");
-                }
-                else {
-                    button.setText("Highlight Destinations: On");
-                }
-                boardComponent.doClick();
-            }
-        };
-        button.addItemListener(toggleListener);
-        layout.add(button, BorderLayout.NORTH);
-
-        // Add layout to frame
-        frame.add(layout);
-
-        //Display the window
-        frame.setTitle("Checkers Game");
-        frame.setSize(600, 715);
-        frame.setBounds(500, 100, 600, 715);
+        frame.add(label);
+        frame.pack();
+        frame.setSize(1280, 800);
         frame.setVisible(true);
-        frame.setResizable(false);
+
+
+    }*/
+    public static void main(String[] args){
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                try {
+                    new GameWindow();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
     }
 }

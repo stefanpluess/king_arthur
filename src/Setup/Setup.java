@@ -42,26 +42,13 @@ public class Setup {
         this.playerList = playerList;
         this.inp = new InputHandler();
         this.StartingLocation = StartingLocation;
-        setupPlayerList(playerList, StartingLocation);
+        this.setupPlayerList(playerList, StartingLocation);
     }
 
         public void setupInputHandler () {
             inp = new InputHandler();
         }
 
-        public void setupStates () {
-            State BeginningState = new BeginningState();
-            State MalgrinState = new MalgrinState();
-            State LadyOfTheSeaState = new LadyOfTheSeaState();
-            State UngeheuerState = new UngeheuerState();
-            State InnkeeperState = new InnkeeperState();
-        }
-
-        public void setupLocations () {
-            Bridge bridge = new Bridge(this.MalgrinState);
-            StartingLocation startingLocation = new StartingLocation();
-            Tournament_Ground tournament_ground = new Tournament_Ground();
-        }
 
         public void fillStatusList () {
             UngeheuerState.fillStatusList(playerList);

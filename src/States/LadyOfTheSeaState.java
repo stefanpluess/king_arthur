@@ -22,10 +22,10 @@ public class LadyOfTheSeaState extends State{
         System.out.println("Ich bin die Herrin vom see, gib mir 3 Güter");
     }
     public void explore(Player p){
-        System.out.println("Ich bin die Herrin vom See, willsch du min fettli ha?");
+        System.out.println("Ich bin die Herrin vom See, ");
     }
     public void doNothing(Player p){
-        System.out.println("aint doin shit here");
+        System.out.println("nothing");
     };
     public Status[] stats = {Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN, Status.UNKNOWN};
     @Override

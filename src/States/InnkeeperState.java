@@ -52,10 +52,10 @@ public class InnkeeperState extends State{
     }
 
     public void explore (Player p){
-            System.out.println("Ich bin die Herrin vom See, willsch du min fettli ha?");
+            System.out.println("Ich bin die Herrin vom See");
     }
     public void doNothing (Player p){
-        System.out.println("aint doin shit here");
+        System.out.println("nothing");
     }
     public void trade(Player p, Random rand) {
         Goods[] chosen = {GoodList[rand.nextInt(2)], Goods.NONE};

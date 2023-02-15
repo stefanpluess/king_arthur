@@ -1,5 +1,8 @@
 package GUI;
 
+import Locations.Location;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //This class is supposed to handle input from the user. This will be replaced as the final version of the game
@@ -11,7 +14,7 @@ public class InputHandler {
     }
 
     public static Actions getPlayerActionInput(){
-        System.out.println("Would you like to explore or do Nothing? Press 0 for explore, 1 for doNothing 2 for Fighting or 3 if you want to giveSwords or 4 if you would like to trade");
+        System.out.println("Would you like to explore or do Nothing? Press 0 for explore or 1 for doNothing");
         return Actions.values()[Integer.parseInt(input.nextLine())];
     }
 
@@ -23,6 +26,11 @@ public class InputHandler {
     public int getAmountOfPlayers(){
         System.out.println("How many Players will be playing? \n Pleasse enter a number between 1 and 4");
         return Integer.parseInt(input.nextLine());
+    }
+
+    public Location getNextLocation(ArrayList<Location> adjacent){
+        System.out.println("Where would you like to move?");
+        return adjacent.get(Integer.parseInt(input.nextLine()));
     }
 
     public void continuePlaying(){

@@ -9,7 +9,8 @@ import java.util.Scanner;
 
 public abstract class Location {
     //Variables
-    public ArrayList<State> possibleAdventures = new ArrayList<State>();
+    public ArrayList<State> possibleAdventuresExplore = new ArrayList<State>();
+    public ArrayList<State> possibleAdventuresDoNothing = new ArrayList<>();
     public Merlin merlin;
     public merlinType markedByMerlin;
     public ArrayList<Location> adjacent = new ArrayList<>();
@@ -31,9 +32,10 @@ public abstract class Location {
         p.setCurrentLocation(chosenLocation);
         chosenLocation.arrive(p);
     }
+    //TODO change this method as we need to differentiate between explore and doing nothing
     public void chooseAdventure(Player p){
-        int chosenAdventure = (int) (Math.floor(Math.random() * possibleAdventures.size()));
-        p.setCurrentState(possibleAdventures.get(chosenAdventure));
+        int chosenAdventure = (int) (Math.floor(Math.random() * possibleAdventuresExplore.size()));
+        p.setCurrentState(possibleAdventuresExplore.get(chosenAdventure));
         p.startAdventure();
     }
     public abstract void addadjacents(Location l);
